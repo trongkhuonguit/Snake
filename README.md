@@ -12,8 +12,8 @@ Chúc các thành viên trong nhóm (Khương, Lợi, Hiếu) phối hợp thậ
 | MSSV | Họ và tên | GitHub | Nhiệm vụ đảm nhiệm | Chi tiết công việc |
 | :---: | :--- | :---: | :--- | :--- |
 | **26730037** | **Nguyễn Trọng Khương** | [@trongkhuonguit](https://github.com/trongkhuonguit) | **Bộ khung cốt lõi (Core Engine)** | - Xây dựng Game Loop chính.<br>- Khởi tạo cấu trúc dữ liệu con rắn.<br>- Xử lý di chuyển, xóa vết đuôi và vẽ rắn.<br>- Bắt phím điều khiển (W, A, S, D). |
-| **26730044** | **Trần Minh Lợi** | | **Vẽ Khung & Va chạm (Map & Wall)** | - Viết hàm vẽ khung viền sân chơi (`VeKhung`).<br>- Giới hạn tọa độ bản đồ.<br>- Xử lý sự kiện va chạm tường (Game Over).<br>- Xử lý tự cắn vào đuôi. |
-| **26730021** | **Trần Minh Hiếu** | | **Ăn Mồi & Điểm số (Food & Score)** | - Khởi tạo tọa độ quả mồi.<br>- Hàm sinh mồi ngẫu nhiên không trùng thân rắn.<br>- Vẽ mồi ra màn hình.<br>- Xử lý ăn mồi: tăng độ dài rắn và cộng điểm. |
+| **26730044** | **Trần Minh Lợi** | [@TML-UIT](https://github.com/TML-UIT) | **Vẽ Khung & Va chạm (Map & Wall)** | - Viết hàm vẽ khung viền sân chơi (`VeKhung`).<br>- Giới hạn tọa độ bản đồ.<br>- Xử lý sự kiện va chạm tường (Game Over).<br>- Xử lý tự cắn vào đuôi. |
+| **26730021** | **Trần Minh Hiếu** | [@minhhieutran-uit](https://github.com/minhhieutran-uit) | **Ăn Mồi & Điểm số (Food & Score)** | - Khởi tạo tọa độ quả mồi.<br>- Hàm sinh mồi ngẫu nhiên không trùng thân rắn.<br>- Vẽ mồi ra màn hình.<br>- Xử lý ăn mồi: tăng độ dài rắn và cộng điểm. |
 
 ---
 
