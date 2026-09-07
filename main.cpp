@@ -1,6 +1,8 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -58,14 +60,58 @@ public:
     }
 };
 
+bool TrungThanRan(Point Moi, const CONRAN& r) {
+    for (int i = 0; i < r.DoDai; i++) {
+        if (Moi.x == r.A[i].x && Moi.y == r.A[i].y) return true;
+    }
+    return false;
+}
+
+void TaoMoi(Point& Moi, const CONRAN& r) {
+    do {
+        Moi.x = rand() % 78 + 1;
+        Moi.y = rand() % 23 + 1;
+    } while (TrungThanRan(Moi, r));
+}
+
+void VeMoi(Point Moi) {
+    gotoxy(Moi.x, Moi.y);
+    cout << "*";
+}
+
+void VeDiem(int Diem) {
+    gotoxy(0, 0);
+    cout << "Diem: " << Diem;
+}
+
+void XuLyAnMoi(CONRAN& r, Point& Moi, Point DuoiCu, int& Diem) {
+    if (r.A[0].x != Moi.x || r.A[0].y != Moi.y) return;
+
+    if (r.DoDai < 100) {
+        r.A[r.DoDai] = DuoiCu;
+        r.DoDai++;
+    }
+    Diem += 10;
+    VeDiem(Diem);
+    TaoMoi(Moi, r);
+    VeMoi(Moi);
+}
+
 int main() {
     AnConTro();
     system("cls");
 
+    srand(static_cast<unsigned int>(time(NULL)));
+
     CONRAN r;
+    Point Moi;
     int Huong = 0;
+    int Diem = 0;
     char t;
 
+    TaoMoi(Moi, r);
+    VeMoi(Moi);
+    VeDiem(Diem);
     r.Ve();
 
     while (true) {
@@ -77,7 +123,9 @@ int main() {
             if ((t == 'w' || t == 'W') && Huong != 1) Huong = 3;
         }
 
+        Point DuoiCu = r.A[r.DoDai - 1];
         r.DiChuyen(Huong);
+        XuLyAnMoi(r, Moi, DuoiCu, Diem);
         r.Ve();
         Sleep(120);
     }
