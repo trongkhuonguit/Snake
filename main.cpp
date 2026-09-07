@@ -6,6 +6,11 @@
 
 using namespace std;
 
+const int MAP_LEFT = 0;
+const int MAP_TOP = 1;
+const int MAP_RIGHT = 79;
+const int MAP_BOTTOM = 23;
+
 struct Point {
     int x, y;
 };
@@ -22,6 +27,21 @@ void AnConTro() {
     cursorInfo.dwSize = 100;
     cursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+}
+
+void VeKhung() {
+    for (int x = MAP_LEFT; x <= MAP_RIGHT; x++) {
+        gotoxy(x, MAP_TOP);
+        cout << "#";
+        gotoxy(x, MAP_BOTTOM);
+        cout << "#";
+    }
+    for (int y = MAP_TOP; y <= MAP_BOTTOM; y++) {
+        gotoxy(MAP_LEFT, y);
+        cout << "#";
+        gotoxy(MAP_RIGHT, y);
+        cout << "#";
+    }
 }
 
 class CONRAN {
@@ -69,9 +89,22 @@ bool TrungThanRan(Point Moi, const CONRAN& r) {
 
 void TaoMoi(Point& Moi, const CONRAN& r) {
     do {
-        Moi.x = rand() % 78 + 1;
-        Moi.y = rand() % 23 + 1;
+        Moi.x = rand() % (MAP_RIGHT - MAP_LEFT - 1) + MAP_LEFT + 1;
+        Moi.y = rand() % (MAP_BOTTOM - MAP_TOP - 1) + MAP_TOP + 1;
     } while (TrungThanRan(Moi, r));
+}
+
+bool VaChamTuong(const CONRAN& r) {
+    Point Dau = r.A[0];
+    return Dau.x <= MAP_LEFT || Dau.x >= MAP_RIGHT || Dau.y <= MAP_TOP || Dau.y >= MAP_BOTTOM;
+}
+
+bool VaChamThan(const CONRAN& r) {
+    Point Dau = r.A[0];
+    for (int i = 1; i < r.DoDai; i++) {
+        if (Dau.x == r.A[i].x && Dau.y == r.A[i].y) return true;
+    }
+    return false;
 }
 
 void VeMoi(Point Moi) {
@@ -82,6 +115,11 @@ void VeMoi(Point Moi) {
 void VeDiem(int Diem) {
     gotoxy(0, 0);
     cout << "Diem: " << Diem;
+}
+
+void GameOver(int Diem) {
+    gotoxy(MAP_LEFT, MAP_BOTTOM + 2);
+    cout << "GAME OVER! Diem cua ban: " << Diem << endl;
 }
 
 void XuLyAnMoi(CONRAN& r, Point& Moi, Point DuoiCu, int& Diem) {
@@ -109,6 +147,7 @@ int main() {
     int Diem = 0;
     char t;
 
+    VeKhung();
     TaoMoi(Moi, r);
     VeMoi(Moi);
     VeDiem(Diem);
@@ -125,6 +164,12 @@ int main() {
 
         Point DuoiCu = r.A[r.DoDai - 1];
         r.DiChuyen(Huong);
+
+        if (VaChamTuong(r) || VaChamThan(r)) {
+            GameOver(Diem);
+            break;
+        }
+
         XuLyAnMoi(r, Moi, DuoiCu, Diem);
         r.Ve();
         Sleep(120);
